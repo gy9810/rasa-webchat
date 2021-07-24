@@ -31,6 +31,15 @@ class Message extends PureComponent {
       style = { color: userTextColor, backgroundColor: userBackgroundColor };
     }
 
+    //若消息为空则不展示
+    if(text == '' || text == null){
+      return null;
+    }
+    const reg1 = / ,/g; //去除逗号前的空格
+    const reg2 = /^\s+|\s+$/g; //去除头尾空格
+    const reg3 = /(\w)\[/g; //在字母和'['间增加空格
+    const new_text = text.replace(reg1, ',').replace(reg2, '').replace(reg3, '$1 [');
+
     return (
       <div
         className={sender === 'response' && customCss && customCss.style === 'class' ?
@@ -44,7 +53,7 @@ class Message extends PureComponent {
           {sender === 'response' ? (
             <ReactMarkdown
               className={'rw-markdown'}
-              source={text}
+              source={new_text}
               linkTarget={(url) => {
                 if (!url.startsWith('mailto') && !url.startsWith('javascript')) return '_blank';
                 return undefined;
