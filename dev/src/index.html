@@ -19,7 +19,6 @@
 					t = document.head || document.getElementsByTagName("head")[0];
 				(e.src =
           			"../../lib/index.js"),
-					// "https://cdn.cicadaspeech.net/npm/rasa-webchat@1.0.0/lib/index.js"),
 					(e.async = !0),
 					(e.onload = () => {
 						window.WebChat.default(
@@ -28,6 +27,7 @@
 								customData: {language: "en"},
 								socketUrl: "https://zoom-rasa-x.prod.cicadaspeech.net",
 								socketPath: "/core/socket.io/",
+								//socketUrl: "http://localhost:5005",
 								title: "FAQ Bot",
 								subtitle: "by Cicada",
 								displayUnreadCount: true

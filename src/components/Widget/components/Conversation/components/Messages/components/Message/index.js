@@ -35,10 +35,20 @@ class Message extends PureComponent {
     if(text == '' || text == null){
       return null;
     }
+
+    //当答案只含一个bullet point时将其删除
+    var txt = text;
+    if(txt.split('* ').length - 1 === 1){
+      txt = txt.replace(/^\*\s/, '');
+    }
+
     const reg1 = / ,/g; //去除逗号前的空格
-    const reg2 = /^\s+|\s+$/g; //去除头尾空格
-    const reg3 = /(\w)\[/g; //在字母和'['间增加空格
-    const new_text = text.replace(reg1, ',').replace(reg2, '').replace(reg3, '$1 [');
+    const reg2 = /(\w)\[/g; //在字母和'['间增加空格
+    const reg3 = /(\.png\))(\s)*\*{2}/g; //在图片和加粗文本之间换行
+    const new_text = txt
+      .replace(reg1, ',')
+      .replace(reg2, '$1 [')
+      .replace(reg3, '$1\n**');
 
     return (
       <div
